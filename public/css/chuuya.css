@@ -1,0 +1,270 @@
+/* RESET */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* BODY */
+
+body{
+    background-color: #f7efe7;
+    font-family: 'Segoe UI', sans-serif;
+    color: #4b2c35;
+    line-height: 1.7;
+}
+
+
+/* CONTAINER */
+
+.container{
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+
+/* NAVBAR */
+
+.navbar{
+    width: 100%;
+    padding: 20px 0;
+    background-color: #4a4a4a;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo{
+    color: white;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.nav-links{
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a{
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+    font-size: 1rem;
+}
+
+.nav-links a:hover{
+    color: #d49a89;
+}
+
+
+/* AUTOR */
+
+.autor{
+    padding: 100px 0 70px;
+    text-align: center;
+}
+
+.autor h1{
+    font-size: 4.5rem;
+    color: #8b003d;
+    margin-bottom: 10px;
+}
+
+.subtitulo{
+    font-size: 1.4rem;
+    color: #c06b85;
+    font-style: italic;
+    margin-bottom: 50px;
+}
+
+.autor h2{
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    color: #5a2232;
+}
+
+.autor p{
+    max-width: 900px;
+    margin: auto;
+    margin-bottom: 25px;
+    font-size: 1.15rem;
+    color: #5f4a52;
+}
+
+
+/* OBRAS */
+
+.obras{
+    padding: 70px 0;
+}
+
+.obras h2{
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 60px;
+    color: #8b003d;
+}
+
+
+/* CARDS */
+
+.card{
+    background-color: white;
+    border: 1px solid #f3ccd7;
+    border-radius: 28px;
+    padding: 30px;
+
+    display: flex;
+    align-items: center;
+    gap: 35px;
+
+    margin-bottom: 40px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+
+    transition: 0.3s;
+}
+
+.card:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+
+/* IMAGEM */
+
+.card img{
+    width: 230px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+
+/* TITULO */
+
+.card h3{
+    font-size: 2rem;
+    color: #8b003d;
+    margin-bottom: 10px;
+}
+
+
+/* TEXTOS */
+
+.card p{
+    color: #5f4a52;
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+}
+
+
+/* POEMA */
+
+.poema{
+    padding: 80px 0;
+}
+
+.poema .container{
+    background-color: white;
+    border-radius: 30px;
+    padding: 60px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    border: 1px solid #f3ccd7;
+}
+
+.poema h2{
+    text-align: center;
+    font-size: 3rem;
+    color: #8b003d;
+    margin-bottom: 40px;
+}
+
+
+/* BLOCKQUOTE */
+
+blockquote{
+    font-size: 1.6rem;
+    color: #5a2232;
+    font-style: italic;
+    line-height: 2;
+    border-left: 5px solid #d49a89;
+    padding-left: 25px;
+}
+
+.poema p{
+    text-align: right;
+    margin-top: 20px;
+    color: #a64d6c;
+    font-size: 1.1rem;
+}
+
+
+/* LEGADO */
+
+.legado{
+    padding: 80px 0 120px;
+}
+
+.legado .container{
+    background-color: white;
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    border: 1px solid #f3ccd7;
+}
+
+.legado h2{
+    font-size: 2.8rem;
+    color: #8b003d;
+    margin-bottom: 25px;
+}
+
+.legado p{
+    font-size: 1.15rem;
+    color: #5f4a52;
+}
+
+
+/* RESPONSIVO */
+
+@media(max-width: 900px){
+
+    .nav-content{
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .nav-links{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .autor h1{
+        font-size: 3rem;
+    }
+
+    .card{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .card img{
+        width: 100%;
+        max-width: 300px;
+    }
+
+    blockquote{
+        font-size: 1.2rem;
+    }
+
+}

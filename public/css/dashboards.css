@@ -1,0 +1,192 @@
+/* pagina mura
+/* RESET */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* BODY */
+
+body{
+    background-color: #4a4a4a;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    min-height: 100vh;
+}
+
+
+/* NAVBAR */
+
+.navbar{
+    width: 100%;
+    padding: 20px 0;
+}
+
+.nav-content{
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* LOGO */
+
+.nav-logo{
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+
+/* LINKS */
+
+.nav-links{
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a{
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.nav-links a:hover{
+    color: #c98e5f;
+}
+
+
+/* DASHBOARD */
+
+.dashboard{
+    width: 90%;
+    max-width: 1200px;
+    margin: 50px auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* CARDS */
+
+.cards-dashboard{
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+
+    margin-bottom: 50px;
+}
+
+
+/* CARD */
+
+.card-info{
+    width: 280px;
+    height: 170px;
+
+    background-color: #f4f4f0;
+
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding-left: 35px;
+
+    transition: 0.3s;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+
+/* HOVER */
+
+.card-info:hover{
+    transform: translateY(-5px);
+}
+
+
+/* NUMEROS */
+
+.card-info h2{
+    color: #c98e5f;
+    font-size: 4rem;
+    margin-bottom: 10px;
+}
+
+
+/* TEXTO */
+
+.card-info p{
+    color: #444;
+    font-size: 1.2rem;
+}
+
+
+/* GRAFICO */
+
+.grafico-area{
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
+
+/* CARD GRAFICO */
+
+.grafico-card{
+    width: 750px;
+
+    background-color: #f4f4f0;
+
+    padding: 40px;
+
+    border-radius: 25px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+
+/* TITULO */
+
+.grafico-card h2{
+    text-align: center;
+
+    margin-bottom: 30px;
+
+    color: #3e2723;
+
+    font-size: 2.5rem;
+}
+
+
+/* CANVAS */
+
+canvas{
+    max-height: 400px;
+}
+.grafico-container{
+    width: 100%;
+    max-width: 450px;
+
+    margin: auto;
+}
+
+#graficoPerfis{
+    width: 100% !important;
+    height: 400px !important;
+}
+

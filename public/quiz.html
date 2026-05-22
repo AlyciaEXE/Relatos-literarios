@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href=".\css\quiz.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="container nav-content">
+
+            <div class="nav-logo">文豪ストレイドッグス</div>
+
+            <div class="nav-links">
+                <a href="home.html" class="nav-ativo">Home</a>
+                <a href="login.html" class="nav-login">Entrar</a>
+                <a href="cadastro.html" class="nav-cadastro">Cadastrar</a>
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <div id="jogo" class="quiz-card">
+
+        <div class="cabecalhoPergunta">
+
+            <div id="infoQuestao">
+                QUESTÃO
+                <span id="spanNumeroDaQuestaoAtual"></span>
+                /
+                <span id="qtdQuestoes"></span>
+            </div>
+
+            <div id="perguntaDaQuestaoAtual">
+                <span id="spanQuestaoExibida"></span>
+            </div>
+
+        </div>
+
+
+        <div id="opcoes" class="options-group">
+
+            <span>
+                <input type="radio" id="primeiraOpcao" name="option">
+                <label for="primeiraOpcao" id="labelOpcaoUm"></label>
+            </span>
+
+            <br><br>
+
+            <span>
+                <input type="radio" id="segundaOpcao" name="option">
+                <label for="segundaOpcao" id="labelOpcaoDois"></label>
+            </span>
+
+        </div>
+
+
+        <div class="controles">
+
+            <button onclick="avancar()" id="btnProx" class="btn-proxima">
+                Próxima
+            </button>
+
+        </div>
+
+    </div>
+
+</body>
+
+<script>
+
+const listaDeQuestoes = [
+
+    {
+        idPergunta: 1,
+
+        pergunta: "O que mais te atrai em uma história?",
+
+        alternativaA: {
+            texto: "Profundidade psicológica e questionamentos existenciais",
+            idOpcao: 1
+        },
+
+        alternativaB: {
+            texto: "Beleza lírica e expressão emocional",
+            idOpcao: 2
+        }
+    },
+
+    {
+        idPergunta: 2,
+
+        pergunta: "Qual estilo de escrita você prefere?",
+
+        alternativaA: {
+            texto: "Prosa introspectiva e sombria",
+            idOpcao: 3
+        },
+
+        alternativaB: {
+            texto: "Versos poéticos e melódicos",
+            idOpcao: 4
+        }
+    },
+
+    {
+        idPergunta: 3,
+
+        pergunta: "Que tipo de protagonista te interessa?",
+
+        alternativaA: {
+            texto: "Alguém lutando contra seus próprios demônios internos",
+            idOpcao: 5
+        },
+
+        alternativaB: {
+            texto: "Alguém expressando suas emoções através da arte",
+            idOpcao: 6
+        }
+    }
+
+];
+
+
+
+let numeroDaQuestaoAtual = 0;
+
+let pontosDazai = 0;
+
+let pontosChuuya = 0;
+
+let respostasUsuario = [];
+
+
+
+function preencherHTMLcomQuestaoAtual(i) {
+
+    const questaoAtual = listaDeQuestoes[i];
+
+    spanNumeroDaQuestaoAtual.innerHTML = i + 1;
+
+    qtdQuestoes.innerHTML = listaDeQuestoes.length;
+
+    spanQuestaoExibida.innerHTML = questaoAtual.pergunta;
+
+    labelOpcaoUm.innerHTML = questaoAtual.alternativaA.texto;
+
+    labelOpcaoDois.innerHTML = questaoAtual.alternativaB.texto;
+}
+
+
+
+function avancar() {
+
+    let respondeu = false;
+
+    if (primeiraOpcao.checked || segundaOpcao.checked) {
+
+        respondeu = true;
+    }
+
+    if (!respondeu) {
+
+        alert("Escolha uma alternativa!");
+
+        return;
+    }
+
+    salvarResposta();
+
+    desmarcarRadioButtons();
+
+    numeroDaQuestaoAtual++;
+
+    if (numeroDaQuestaoAtual < listaDeQuestoes.length) {
+
+        preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual);
+
+    } else {
+
+        mostrarResultado();
+    }
+}
+
+
+
+function salvarResposta() {
+
+    const perguntaAtual = listaDeQuestoes[numeroDaQuestaoAtual];
+
+    let idOpcaoEscolhida;
+
+    if (primeiraOpcao.checked) {
+
+        pontosDazai++;
+
+        idOpcaoEscolhida = perguntaAtual.alternativaA.idOpcao;
+    }
+
+    if (segundaOpcao.checked) {
+
+        pontosChuuya++;
+
+        idOpcaoEscolhida = perguntaAtual.alternativaB.idOpcao;
+    }
+
+    respostasUsuario.push({
+
+        fkPergunta: perguntaAtual.idPergunta,
+        fkOpcao: idOpcaoEscolhida
+    });
+}
+
+
+
+function desmarcarRadioButtons() {
+
+    primeiraOpcao.checked = false;
+
+    segundaOpcao.checked = false;
+}
+
+
+
+function salvarNoBanco() {
+
+    let idUsuario = sessionStorage.ID_USUARIO;
+
+    for (let i = 0; i < respostasUsuario.length; i++) {
+
+        fetch("/quiz/salvarResultado", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                fkUsuario: idUsuario,
+                fkPergunta: respostasUsuario[i].fkPergunta,
+                fkOpcao: respostasUsuario[i].fkOpcao
+            })
+
+        });
+    }
+}
+
+
+
+function mostrarResultado() {
+
+    salvarNoBanco();
+
+    jogo.innerHTML = "";
+
+    if (pontosDazai > pontosChuuya) {
+
+        jogo.innerHTML = `
+        
+        <h1>Você combina com Osamu Dazai!</h1>
+
+        <p>
+        Sua personalidade é introspectiva, inteligente e profunda.
+        </p>
+
+        <p>
+        Livro recomendado: Indigno de Ser Humano
+        </p>
+
+        <div class="controles">
+
+            <a href="dazai.html">
+                <button class="btn-proxima">
+                    Ver Página do Autor
+                </button>
+            </a>
+
+        </div>
+        `;
+
+    } else {
+
+        jogo.innerHTML = `
+        
+        <h1>Você combina com Chuuya Nakahara!</h1>
+
+        <p>
+        Você possui uma personalidade intensa, emocional e apaixonada.
+        </p>
+
+        <p>
+        Livro recomendado: Songs of a Goat
+        </p>
+
+        <div class="controles">
+
+            <a href="chuuya.html">
+                <button class="btn-proxima">
+                    Ver Página do Autor
+                </button>
+            </a>
+
+        </div>
+        `;
+    }
+}
+
+
+
+preencherHTMLcomQuestaoAtual(0);
+
+</script>
+
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+     <link rel="stylesheet" href="../CSS/dashboards.css">
+
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+      <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="nav-content">
+
+            <div class="nav-logo">
+                文豪ストレイドッグス
+            </div>
+
+            <div class="nav-links">
+
+                <a href="home.html">Home</a>
+
+                <a href="chuuya.html">CHUUYA</a>
+
+                <a href="dazai.html">DAZAI</a>
+
+                <a href="quiz.html">Quiz</a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- DASHBOARD -->
+
+    <div class="dashboard">
+
+        <!-- CARDS -->
+
+        <div class="cards-dashboard">
+
+            <div class="card-info">
+
+                <h2 id="Chuuya">0</h2>
+
+                <p>Respostas Chuuya</p>
+
+            </div>
+
+
+            <div class="card-info">
+
+                <h2 id="Dazai">20%</h2>
+
+                <p>Respostas Dazai</p>
+
+            </div>
+
+
+            <div class="card-info">
+
+                <h2 id="Usuarios">0</h2>
+
+                <p>Usuários Cadastrados</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- GRAFICO -->
+
+       <div class="grafico-card">
+
+    <h2>Gráfico Comparativo</h2>
+
+    <div class="grafico-container">
+
+        <canvas id="graficoPerfis"></canvas>
+
+    </div>
+
+</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+<script>
+ const ctx = document.getElementById('graficoPerfis');
+
+       fetch("/dashboard")
+
+.then(function(resposta){
+
+    return resposta.json();
+
+})
+
+.then(function(dados){
+
+    console.log(dados);
+
+    let votosDazai = dados[0].votosDazai;
+
+    let votosChuuya = dados[0].votosChuuya;
+
+    let totalUsuarios = dados[0].totalUsuarios;
+
+    
+    
+
+    document.getElementById("Dazai").innerHTML = votosDazai;
+
+    document.getElementById("Chuuya").innerHTML = votosChuuya;
+
+    document.getElementById("Usuarios").innerHTML = totalUsuarios;
+
+
+    
+
+    const ctx = document.getElementById('graficoPerfis');
+
+    new Chart(ctx, {
+
+        type: 'pie',
+
+        data: {
+
+            labels: [
+                'Dazai',
+                'Chuuya'
+            ],
+
+            datasets: [{
+
+                data: [votosDazai, votosChuuya],
+
+                backgroundColor: [
+                    '#89CFF0',
+                    '#F4B183'
+                ],
+
+                borderWidth: 2
+
+            }]
+        },
+
+        options: {
+
+            responsive: true,
+
+            plugins: {
+
+                legend: {
+
+                    labels: {
+
+                        color: 'white',
+
+                        font: {
+                            size: 14
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+});
+
+</script>
+</html>

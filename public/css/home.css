@@ -1,0 +1,157 @@
+/* Configurações Gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f4f4f0; /* Bege clarinho do fundo */
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- NAVBAR --- */
+.navbar {
+    background-color: #4a4a4a; 
+    padding: 15px 0;
+    color: white;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: #d1d1d1;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 0.9rem;
+    text-transform: capitalize;
+    transition: 0.3s;
+}
+
+.nav-links a:hover, .nav-ativo {
+    color: #c98e5f !important; /* Laranja suave */
+}
+
+/* Estilo específico para o botão Cadastrar na Nav */
+.nav-cadastro {
+    background-color: #c98e5f;
+    color: white !important;
+    padding: 8px 18px;
+    border-radius: 5px;
+}
+
+/* --- HERO SECTION --- */
+.hero-pag {
+    text-align: center;
+    padding: 100px 20px;
+    background-color: #f4f4f0;
+}
+
+.hero-conteudo h1 {
+    font-size: 4rem;
+    margin-bottom: 10px;
+    color: #3e2723;
+}
+
+.hero-conteudo h1 span {
+    color: #6d6d6d; /* Cor do "Dogs" */
+}
+
+.hero-conteudo h3 {
+    font-size: 1.8rem;
+    color: #c98e5f; /* Laranja do subtitulo */
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.hero-conteudo p {
+    max-width: 700px;
+    margin: 0 auto 30px;
+    color: #666;
+}
+
+.hero-btn {
+    background-color: #c98e5f;
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.hero-btn:hover {
+    transform: scale(1.05);
+}
+
+/* --- SEÇÃO ESCRITORES (CARDS) --- */
+.escritores {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 50px 20px;
+   
+}
+
+.card {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    padding: 40px;
+    width: 450px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.card h3 {
+    font-size: 2.2rem;
+    color: #3e2723;
+    margin-bottom: 5px;
+}
+
+.subtitulo {
+    color: #a89090;
+    font-style: italic;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+}
+
+.descricao {
+    color: #777;
+    flex-grow: 1; /* Garante que o texto ocupe o espaço e o footer fique embaixo */
+}
+
+.card-footer {
+    text-align: right;
+    margin-top: 30px;
+    color: #c98e5f;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Footer do site */
+footer {
+    text-align: center;
+    padding: 40px;
+    color: #999;
+    font-size: 0.8rem;
+}
