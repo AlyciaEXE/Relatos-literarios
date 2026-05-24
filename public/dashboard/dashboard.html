@@ -21,13 +21,13 @@
 
             <div class="nav-links">
 
-                <a href="home.html">Home</a>
+                <a href="/public/home.html">Home</a>
 
-                <a href="chuuya.html">CHUUYA</a>
+                <a href="/public/chuuya.html">CHUUYA</a>
 
-                <a href="dazai.html">DAZAI</a>
+                <a href="/public/dazai.html">DAZAI</a>
 
-                <a href="quiz.html">Quiz</a>
+                <a href="/public/quiz.html">Quiz</a>
 
             </div>
 
@@ -55,7 +55,7 @@
 
             <div class="card-info">
 
-                <h2 id="Dazai">20%</h2>
+                <h2 id="Dazai">0%</h2>
 
                 <p>Respostas Dazai</p>
 
@@ -107,19 +107,20 @@
 .then(function(dados){
 
     console.log(dados);
-
     let votosDazai = dados[0].votosDazai;
-
+    
     let votosChuuya = dados[0].votosChuuya;
+    
+    let votosTotais = dados[0].votosDazai + dados[0].votosChuuya;
 
     let totalUsuarios = dados[0].totalUsuarios;
 
-    
-    
+    let PorcentagemChuuya = (votosChuuya / votosTotais) * 100;
+    let PorcentagemDazai = (votosDazai / votosTotais) * 100;
 
-    document.getElementById("Dazai").innerHTML = votosDazai;
+    document.getElementById("Dazai").innerHTML = `${PorcentagemDazai.toFixed(0)}%`;
 
-    document.getElementById("Chuuya").innerHTML = votosChuuya;
+    document.getElementById("Chuuya").innerHTML = `${PorcentagemChuuya.toFixed(0)}%`;
 
     document.getElementById("Usuarios").innerHTML = totalUsuarios;
 
