@@ -1,4 +1,4 @@
-/* Configurações Gerais */
+
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #f4f4f0; /* Bege clarinho do fundo */
+    background-color: #f4f4f0; 
     font-family: 'Segoe UI', Arial, sans-serif;
     color: #333;
     line-height: 1.6;
@@ -46,7 +46,7 @@ body {
 }
 
 .nav-links a:hover, .nav-ativo {
-    color: #c98e5f !important; /* Laranja suave */
+    color: #c98e5f !important; 
 }
 
 /* Estilo específico para o botão Cadastrar na Nav */
@@ -71,12 +71,12 @@ body {
 }
 
 .hero-conteudo h1 span {
-    color: #6d6d6d; /* Cor do "Dogs" */
+    color: #6d6d6d; 
 }
 
 .hero-conteudo h3 {
     font-size: 1.8rem;
-    color: #c98e5f; /* Laranja do subtitulo */
+    color: #c98e5f;
     margin-bottom: 20px;
     font-weight: 500;
 }

@@ -44,22 +44,25 @@
 
         </div>
 
+<div id="opcoes" class="options-group">
 
-        <div id="opcoes" class="options-group">
+    <label class="opcao">
 
-            <span>
-                <input type="radio" id="primeiraOpcao" name="option">
-                <label for="primeiraOpcao" id="labelOpcaoUm"></label>
-            </span>
+        <input type="radio" id="primeiraOpcao" name="option" class="radio">
 
-            <br><br>
+        <span id="labelOpcaoUm"></span>
 
-            <span>
-                <input type="radio" id="segundaOpcao" name="option">
-                <label for="segundaOpcao" id="labelOpcaoDois"></label>
-            </span>
+    </label>
 
-        </div>
+    <label class="opcao">
+
+        <input type="radio" id="segundaOpcao" name="option" class="radio">
+
+        <span id="labelOpcaoDois"></span>
+
+    </label>
+
+</div>
 
 
         <div class="controles">
@@ -76,54 +79,32 @@
 
 <script>
 
+
+
 const listaDeQuestoes = [
 
     {
-        idPergunta: 1,
-
         pergunta: "O que mais te atrai em uma história?",
 
-        alternativaA: {
-            texto: "Profundidade psicológica e questionamentos existenciais",
-            idOpcao: 1
-        },
+        alternativaA: "Profundidade psicológica e questionamentos existenciais",
 
-        alternativaB: {
-            texto: "Beleza lírica e expressão emocional",
-            idOpcao: 2
-        }
+        alternativaB: "Beleza lírica e expressão emocional"
     },
 
     {
-        idPergunta: 2,
-
         pergunta: "Qual estilo de escrita você prefere?",
 
-        alternativaA: {
-            texto: "Prosa introspectiva e sombria",
-            idOpcao: 3
-        },
+        alternativaA: "Prosa introspectiva e sombria",
 
-        alternativaB: {
-            texto: "Versos poéticos e melódicos",
-            idOpcao: 4
-        }
+        alternativaB: "Versos poéticos e melódicos"
     },
 
     {
-        idPergunta: 3,
-
         pergunta: "Que tipo de protagonista te interessa?",
 
-        alternativaA: {
-            texto: "Alguém lutando contra seus próprios demônios internos",
-            idOpcao: 5
-        },
+        alternativaA: "Alguém lutando contra seus próprios demônios internos",
 
-        alternativaB: {
-            texto: "Alguém expressando suas emoções através da arte",
-            idOpcao: 6
-        }
+        alternativaB: "Alguém expressando suas emoções através da arte"
     }
 
 ];
@@ -135,8 +116,6 @@ let numeroDaQuestaoAtual = 0;
 let pontosDazai = 0;
 
 let pontosChuuya = 0;
-
-let respostasUsuario = [];
 
 
 
@@ -150,9 +129,9 @@ function preencherHTMLcomQuestaoAtual(i) {
 
     spanQuestaoExibida.innerHTML = questaoAtual.pergunta;
 
-    labelOpcaoUm.innerHTML = questaoAtual.alternativaA.texto;
+    labelOpcaoUm.innerHTML = questaoAtual.alternativaA;
 
-    labelOpcaoDois.innerHTML = questaoAtual.alternativaB.texto;
+    labelOpcaoDois.innerHTML = questaoAtual.alternativaB;
 }
 
 
@@ -193,29 +172,15 @@ function avancar() {
 
 function salvarResposta() {
 
-    const perguntaAtual = listaDeQuestoes[numeroDaQuestaoAtual];
-
-    let idOpcaoEscolhida;
-
     if (primeiraOpcao.checked) {
 
         pontosDazai++;
-
-        idOpcaoEscolhida = perguntaAtual.alternativaA.idOpcao;
     }
 
     if (segundaOpcao.checked) {
 
         pontosChuuya++;
-
-        idOpcaoEscolhida = perguntaAtual.alternativaB.idOpcao;
     }
-
-    respostasUsuario.push({
-
-        fkPergunta: perguntaAtual.idPergunta,
-        fkOpcao: idOpcaoEscolhida
-    });
 }
 
 
@@ -229,40 +194,16 @@ function desmarcarRadioButtons() {
 
 
 
-function salvarNoBanco() {
-
-    let idUsuario = sessionStorage.ID_USUARIO;
-
-    for (let i = 0; i < respostasUsuario.length; i++) {
-
-        fetch("/quiz/salvarResultado", {
-
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-
-                fkUsuario: idUsuario,
-                fkPergunta: respostasUsuario[i].fkPergunta,
-                fkOpcao: respostasUsuario[i].fkOpcao
-            })
-
-        });
-    }
-}
-
-
-
 function mostrarResultado() {
-
-    salvarNoBanco();
 
     jogo.innerHTML = "";
 
+    let idAutor;
+
+    
     if (pontosDazai > pontosChuuya) {
+
+        idAutor = 2;
 
         jogo.innerHTML = `
         
@@ -289,6 +230,8 @@ function mostrarResultado() {
 
     } else {
 
+        idAutor = 1;
+
         jogo.innerHTML = `
         
         <h1>Você combina com Chuuya Nakahara!</h1>
@@ -312,11 +255,63 @@ function mostrarResultado() {
         </div>
         `;
     }
+
+    
+    salvarResultadoBanco(idAutor);
+}
+
+
+
+function salvarNoBanco() {
+
+    let idUsuario = sessionStorage.ID_USUARIO;
+
+    let idAutor;
+
+    if (pontosDazai > pontosChuuya) {
+
+        idAutor = 2;
+
+    } else {
+
+        idAutor = 1;
+    }
+
+    fetch("/quiz/salvarResultado", {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+
+            usuario_idusuario: idUsuario,
+            Autor_idAutor: idAutor
+
+        })
+
+    })
+
+    .then(function(resposta){
+
+        console.log("Resultado salvo!");
+
+    })
+
+    .catch(function(erro){
+
+        console.log(erro);
+
+    });
+
 }
 
 
 
 preencherHTMLcomQuestaoAtual(0);
+
 
 </script>
 

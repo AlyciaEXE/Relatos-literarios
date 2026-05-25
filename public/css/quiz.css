@@ -1,5 +1,4 @@
-/* Card principal */
-/* RESET */
+
 
 * {
     margin: 0;
@@ -187,21 +186,39 @@ label {
 }
 
 
-/* RESPONSIVO */
+.options-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
-@media (max-width: 768px) {
+.opcao {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    transition: 0.3s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
 
-    .quiz-card {
-        width: 90%;
-        padding: 30px;
-    }
+.opcao:hover {
+    border-color: #c98e5f;
+    background-color: #fff7f1;
+}
 
-    #perguntaDaQuestaoAtual {
-        font-size: 1.5rem;
-    }
+.radio {
+    display: none;
+}
 
-    .btn-proxima {
-        width: 100%;
-    }
+.opcao span {
+    font-size: 1.1rem;
+    color: #555;
+    width: 100%;
+}
 
+.radio:checked + span {
+    color: #c98e5f;
+    font-weight: bold;
 }

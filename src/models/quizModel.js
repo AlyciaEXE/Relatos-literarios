@@ -1,12 +1,14 @@
 var database = require("../database/config");
 
-function salvarResultado(fkUsuario, fkPergunta, fkOpcao) {
+function salvarResultado(usuario, autor) {
 
     var instrucaoSql = `
-        INSERT INTO Resposta
-        (fkUsuario, fkPergunta, fkOpcao)
+
+        INSERT INTO resposta
+        (usuario_idusuario, Autor_idAutor)
         VALUES
-        (${fkUsuario}, ${fkPergunta}, ${fkOpcao});
+        (${usuario}, ${autor});
+
     `;
 
     console.log(instrucaoSql);
@@ -16,4 +18,4 @@ function salvarResultado(fkUsuario, fkPergunta, fkOpcao) {
 
 module.exports = {
     salvarResultado
-}
+};

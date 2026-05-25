@@ -1,13 +1,10 @@
 var express = require("express");
-
 var router = express.Router();
 
-var dashboardController = require("../controllers/dashboardController");
+var quizController = require("../controllers/quizController");
 
-router.get("/", function(req, res){
-
-    dashboardController.buscarDados(req, res);
-
+router.post("/salvarResultado", function (req, res) {
+    quizController.salvarResultado(req, res);
 });
 
 module.exports = router;

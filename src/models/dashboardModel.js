@@ -1,31 +1,16 @@
 var database = require("../database/config");
 
-function buscarDados(){
+function buscarResultados() {
 
     var instrucaoSql = `
 
         SELECT
 
-        SUM(
-            CASE
-                WHEN fkOpcao IN (1,3,5)
-                THEN 1
-                ELSE 0
-            END
-        ) AS votosDazai,
+        SUM(CASE WHEN Autor_idAutor = 1 THEN 1 ELSE 0 END) AS votosChuuya,
 
-        SUM(
-            CASE
-                WHEN fkOpcao IN (2,4,6)
-                THEN 1
-                ELSE 0
-            END
-        ) AS votosChuuya,
+        SUM(CASE WHEN Autor_idAutor = 2 THEN 1 ELSE 0 END) AS votosDazai,
 
-        (
-            SELECT COUNT(*)
-            FROM usuario
-        ) AS totalUsuarios
+        (SELECT COUNT(*) FROM usuario) AS totalUsuarios
 
         FROM resposta;
 
@@ -34,11 +19,8 @@ function buscarDados(){
     console.log(instrucaoSql);
 
     return database.executar(instrucaoSql);
-
 }
 
 module.exports = {
-
-    buscarDados
-
-}
+    buscarResultados
+};

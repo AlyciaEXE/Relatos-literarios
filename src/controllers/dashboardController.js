@@ -1,27 +1,24 @@
 var dashboardModel = require("../models/dashboardModel");
 
-function buscarDados(req, res){
+function buscarResultados(req, res) {
 
-    dashboardModel.buscarDados()
+    dashboardModel.buscarResultados()
 
-    .then(function(resultado){
+        .then(function(resultado){
 
-        res.json(resultado);
+            res.json(resultado);
 
-    })
+        })
 
-    .catch(function(erro){
+        .catch(function(erro){
 
-        console.log(erro);
+            console.log(erro);
 
-        res.status(500).json(erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
 
-    });
-
+        });
 }
 
 module.exports = {
-
-    buscarDados
-
-}
+    buscarResultados
+};

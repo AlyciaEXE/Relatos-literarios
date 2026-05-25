@@ -1,29 +1,25 @@
-var QuizModel = require("../models/quizModel");
+var quizModel = require("../models/quizModel");
 
 function salvarResultado(req, res) {
 
-    var fkUsuario = req.body.fkUsuario;
-    var fkPergunta = req.body.fkPergunta;
-    var fkOpcao = req.body.fkOpcao;
+    var usuario = req.body.usuario_idusuario;
+    var autor = req.body.Autor_idAutor;
 
-    console.log(req.body);
+    quizModel.salvarResultado(usuario, autor)
 
-    QuizModel.salvarResultado(fkUsuario, fkPergunta, fkOpcao)
-
-        .then(function (resultado) {
+        .then(function(resultado){
 
             res.json(resultado);
 
         })
 
-        .catch(function (erro) {
+        .catch(function(erro){
 
             console.log(erro);
 
             res.status(500).json(erro.sqlMessage);
 
         });
-
 }
 
 module.exports = {
