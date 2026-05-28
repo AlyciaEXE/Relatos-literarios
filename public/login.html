@@ -2,76 +2,135 @@
 <html lang="pt-br">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Bungo stray Dogs | Login</title>
 
     <script src="./js/sessao.js"></script>
 
-    <link rel="stylesheet" href=".\css\estilo.css">
+    <link rel="stylesheet" href="./css/login.css">
+
     <link rel="icon" href="./assets/icon/favicon2.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+
 </head>
 
 <body>
 
-    <!--Header-->
+    <!-- HEADER -->
 
     <div class="header">
+
         <div class="container">
-            <h1 class="titulo">Bungo stray Dogs</h1>
+
+            <h1 class="titulo">
+                Bungo stray Dogs
+            </h1>
+
             <ul class="navbar">
+
                 <li>
                     <a href="home.html">Inicial</a>
                 </li>
-                <li>
-                    <a href="simulador.html">Simulador</a>
-                </li>
+
+                
+
                 <li>|</li>
+
                 <li class="agora">
                     <a href="#">Login</a>
                 </li>
+
                 <li>
                     <a href="cadastro.html">Cadastro</a>
                 </li>
+
             </ul>
+
         </div>
+
     </div>
 
+
+    <!-- LOGIN -->
 
     <div class="login">
-        <div class="alerta_erro">
-            <div class="card_erro" id="cardErro">
-                <span id="mensagem_erro"></span>
-            </div>
-        </div>
-        <div class="container">
-            <div class="card card-login">
-                <h2>Olá de volta!</h2>
-                <div class="formulario">
-                    <div class="campo">
-                        <span>E-mail:</span>
-                        <input id="email_input" type="text" placeholder="Login">
-                    </div>
-                    <div class="campo">
-                        <span>Senha:</span>
-                        <input id="senha_input" type="password" placeholder="******">
-                    </div>
-                    <button class="botao" onclick="entrar()">Entrar</button>
+
+        <div class="card-login">
+
+            <h2>
+                Olá de volta!
+            </h2>
+
+
+            <!-- ERRO -->
+
+            <div class="alerta_erro">
+
+                <div class="card_erro" id="cardErro">
+
+                    <span id="mensagem_erro"></span>
+
                 </div>
 
-                <div id="div_aguardar" class="loading-div">
-                    <img src="./assets/circle-loading.gif" id="loading-gif">
+            </div>
+
+
+            <!-- FORM -->
+
+            <div class="formulario">
+
+                <div class="campo">
+
+                    <span>E-mail</span>
+
+                    <input 
+                    id="email_input" 
+                    type="text" 
+                    placeholder="Digite seu e-mail">
+
                 </div>
 
-                <div id="div_erros_login"></div>
+
+                <div class="campo">
+
+                    <span>Senha</span>
+
+                    <input 
+                    id="senha_input" 
+                    type="password" 
+                    placeholder="******">
+
+                </div>
+
+
+                <button class="botao" onclick="entrar()">
+
+                    Entrar
+
+                </button>
+
             </div>
+
+
+            <!-- LOADING -->
+
+            <div id="div_aguardar" class="loading-div">
+
+                <img src="./assets/circle-loading.gif" id="loading-gif">
+
+            </div>
+
+
+            <div id="div_erros_login"></div>
+
         </div>
+
     </div>
-
-   
 
 </body>
 
@@ -82,7 +141,7 @@
 
     function entrar() {
 
-        // aguardar();
+         div_aguardar.style.display = "flex";
 
         var emailVar = email_input.value;
         var senhaVar = senha_input.value;
@@ -92,6 +151,7 @@
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
             finalizarAguardar();
             return false;
+            div_aguardar.style.display = "none";
         }
         else {
             setInterval(sumirMensagem, 5000)

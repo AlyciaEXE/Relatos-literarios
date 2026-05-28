@@ -5,12 +5,38 @@
     box-sizing: border-box;
 }
 
+
+/* BODY */
+
 body {
-    background-color: #f4f4f0; 
+
+    background:
+    linear-gradient(
+        rgba(20,20,20,0.70),
+        rgba(20,20,20,0.70)
+    ),
+
+    url('../assets/imgs/fundo-bsd.jpg');
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
     font-family: 'Segoe UI', Arial, sans-serif;
+
     color: #333;
+
     line-height: 1.6;
+
+    min-height: 100vh;
 }
+
+
+/* CONTAINER */
 
 .container {
     max-width: 1200px;
@@ -18,11 +44,22 @@ body {
     padding: 0 20px;
 }
 
+
 /* --- NAVBAR --- */
+
 .navbar {
-    background-color: #4a4a4a; 
+
+    background-color: rgba(30,30,30,0.85);
+
+    backdrop-filter: blur(8px);
+
     padding: 15px 0;
+
     color: white;
+
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
 .nav-content {
@@ -34,124 +71,227 @@ body {
 .nav-logo {
     font-size: 1.5rem;
     font-weight: bold;
+
+    color: white;
 }
 
 .nav-links a {
+
     color: #d1d1d1;
+
     text-decoration: none;
+
     margin-left: 20px;
+
     font-size: 0.9rem;
+
     text-transform: capitalize;
+
     transition: 0.3s;
 }
 
-.nav-links a:hover, .nav-ativo {
-    color: #c98e5f !important; 
+.nav-links a:hover,
+.nav-ativo {
+
+    color: #c98e5f !important;
 }
 
-/* Estilo específico para o botão Cadastrar na Nav */
+
+/* BOTAO CADASTRO */
+
 .nav-cadastro {
+
     background-color: #c98e5f;
+
     color: white !important;
+
     padding: 8px 18px;
+
     border-radius: 5px;
 }
 
+
 /* --- HERO SECTION --- */
+
 .hero-pag {
+
     text-align: center;
-    padding: 100px 20px;
-    background-color: #f4f4f0;
+
+    padding: 120px 20px;
+}
+
+.hero-conteudo {
+
+    background-color: rgba(30,30,30,0.65);
+
+    backdrop-filter: blur(10px);
+
+    padding: 60px;
+
+    border-radius: 30px;
+
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+
+    border: 1px solid rgba(255,255,255,0.08);
 }
 
 .hero-conteudo h1 {
+
     font-size: 4rem;
+
     margin-bottom: 10px;
-    color: #3e2723;
+
+    color: white;
 }
 
 .hero-conteudo h1 span {
-    color: #6d6d6d; 
+
+    color: #c98e5f;
 }
 
 .hero-conteudo h3 {
+
     font-size: 1.8rem;
-    color: #c98e5f;
+
+    color: #e0d2c6;
+
     margin-bottom: 20px;
+
     font-weight: 500;
 }
 
 .hero-conteudo p {
+
     max-width: 700px;
+
     margin: 0 auto 30px;
-    color: #666;
+
+    color: #d1d1d1;
 }
 
+
+/* BOTAO HERO */
+
 .hero-btn {
+
     background-color: #c98e5f;
+
     color: white;
+
     border: none;
+
     padding: 15px 35px;
+
     font-size: 1rem;
+
     border-radius: 8px;
+
     cursor: pointer;
-    transition: transform 0.2s;
+
+    transition: 0.3s;
 }
 
 .hero-btn:hover {
+
     transform: scale(1.05);
+
+    background-color: #b67d50;
 }
 
-/* --- SEÇÃO ESCRITORES (CARDS) --- */
+
+/* --- CARDS --- */
+
 .escritores {
+
     display: flex;
+
     justify-content: center;
+
     gap: 30px;
+
     padding: 50px 20px;
-   
+
+    flex-wrap: wrap;
 }
 
 .card {
-    background: white;
-    border: 1px solid #e0e0e0;
+
+    background: rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
     border-radius: 20px;
+
     padding: 40px;
+
     width: 450px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+
     display: flex;
+
     flex-direction: column;
+
+    transition: 0.3s;
+}
+
+.card:hover {
+
+    transform: translateY(-6px);
 }
 
 .card h3 {
+
     font-size: 2.2rem;
-    color: #3e2723;
+
+    color: white;
+
     margin-bottom: 5px;
 }
 
 .subtitulo {
-    color: #a89090;
+
+    color: #d6b89f;
+
     font-style: italic;
+
     margin-bottom: 25px;
+
     font-size: 0.95rem;
 }
 
 .descricao {
-    color: #777;
-    flex-grow: 1; /* Garante que o texto ocupe o espaço e o footer fique embaixo */
+
+    color: #e4e4e4;
+
+    flex-grow: 1;
 }
 
 .card-footer {
+
     text-align: right;
+
     margin-top: 30px;
+
     color: #c98e5f;
+
     font-weight: bold;
+
     cursor: pointer;
 }
 
-/* Footer do site */
+
+/* FOOTER */
+
 footer {
+
     text-align: center;
+
     padding: 40px;
-    color: #999;
-    font-size: 0.8rem;
+
+    color: #d1d1d1;
+
+    font-size: 0.9rem;
 }

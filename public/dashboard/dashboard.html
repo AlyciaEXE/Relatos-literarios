@@ -5,100 +5,163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+
     <link rel="stylesheet" href="../CSS/dashboards.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
-    <!-- NAVBAR -->
 
-    <nav class="navbar">
+    <!-- SIDEBAR -->
 
-        <div class="nav-content">
+    <div class="sidebar">
 
-            <div class="nav-logo">
-                文豪ストレイドッグス
-            </div>
+        <div class="perfil-sidebar">
 
-            <div class="nav-links">
+    <div class="foto-usuario">
 
-                <a href="../chuuya.html" class="nav-chuuya">CHUUYA</a>
+    <img id="imagemUsuario">
 
-                <a href="../dazai.html" class="nav-dazai">DAZAI</a>
+</div>
 
-                <a href="../quiz.html" class="nav-quiz">Quiz</a>
+    <h2 id="nomeUsuarioSidebar">Usuário</h2>
 
-                <a href="../login.html" class="nav-login">Entrar</a>
+    <p>Logado</p>
 
-                <a href="../cadastro.html" class="nav-cadastro">Cadastrar</a>
+</div>
 
-            </div>
+        <a href="../home.html">Home</a>
 
-        </div>
+        <a href="../quiz.html">Quiz</a>
 
-    </nav>
+        <a href="../dazai.html">Dazai</a>
 
+        <a href="../chuuya.html">Chuuya</a>
 
-    <!-- DASHBOARD -->
+        
 
-    <div class="dashboard">
-
-        <!-- CARDS -->
-
-        <div class="cards-dashboard">
-
-            <div class="card-info">
-
-                <h2 id="Chuuya">0</h2>
-
-                <p>Respostas Chuuya</p>
-
-            </div>
-
-
-            <div class="card-info">
-
-                <h2 id="Dazai">0%</h2>
-
-                <p>Respostas Dazai</p>
-
-            </div>
-
-
-            <div class="card-info">
-
-                <h2 id="Usuarios">0</h2>
-
-                <p>Usuários Cadastrados</p>
-
-            </div>
-
-        </div>
-
-
-        <!-- GRAFICO -->
-
-        <div class="grafico-card">
-
-            <h2>Gráfico Comparativo</h2>
-
-            <div class="grafico-container">
-
-                <canvas id="graficoPerfis"></canvas>
-
-            </div>
-
-        </div>
-    </div>
+        
 
     </div>
+
+
+    <!-- CONTAINER -->
+
+    <div class="dashboard-container">
+
+
+        <!-- DASHBOARD -->
+
+        <div class="dashboard">
+
+
+            <!-- NAVBAR -->
+
+            <nav class="navbar">
+
+                <div class="nav-content">
+
+                    <div class="nav-logo">
+                        文豪ストレイドッグス
+                    </div>
+
+                    <div class="nav-links">
+
+                        <a href="../login.html">Entrar</a>
+
+                        <a href="../cadastro.html">Cadastrar</a>
+
+                    </div>
+
+                </div>
+
+            </nav>
+
+
+            <!-- CARDS -->
+
+            <div class="cards-dashboard">
+
+
+                <!-- CHUUYA -->
+
+                <div class="card-info">
+
+                    <h2 id="Chuuya">0%</h2>
+
+                    <p>Respostas Chuuya</p>
+
+                </div>
+
+
+                <!-- DAZAI -->
+
+                <div class="card-info">
+
+                    <h2 id="Dazai">0%</h2>
+
+                    <p>Respostas Dazai</p>
+
+                </div>
+
+
+                <!-- USUARIOS -->
+
+                <div class="card-info">
+
+                    <h2 id="Usuarios">0</h2>
+
+                    <p>Usuários Cadastrados</p>
+
+                </div>
+
+
+                
+
+        
+
+            </div>
+
+
+            <!-- GRAFICO -->
+
+            <div class="grafico-area">
+
+                <div class="grafico-card" id="grafico">
+
+                    <h2>Gráfico Comparativo</h2>
+
+                    <div class="grafico-container">
+
+                        <canvas id="graficoPerfis"></canvas>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
 </body>
+
 <script>
-    const ctx = document.getElementById('graficoPerfis');
+    if (sessionStorage.ID_USUARIO == undefined) {
+
+    alert("Você precisa estar logado para acessar a dashboard!");
+
+    window.location = "../login.html";
+}
+
+    let nome = sessionStorage.NOME_USUARIO;
+
+    document.getElementById("nomeUsuarioSidebar").innerHTML = nome;
+
+    document.getElementById("imagemUsuario").src =
+    sessionStorage.FOTO_USUARIO || "/assets/imgs/perfil/default.jpg";
 
     fetch("/dashboard/buscarResultados")
 
@@ -111,35 +174,36 @@
         .then(function (dados) {
 
             console.log(dados);
-            let votosDazai = dados[0].votosDazai || 0;
 
-    let votosChuuya = dados[0].votosChuuya || 0;
+            let votosDazai = Number(dados[0].votosDazai) || 0;
 
-    let votosTotais = votosDazai + votosChuuya;
+            let votosChuuya = Number(dados[0].votosChuuya) || 0;
 
-    let totalUsuarios = dados[0].totalUsuarios || 0;
+            let votosTotais = votosDazai + votosChuuya;
 
-    let PorcentagemChuuya = 0;
+            let totalUsuarios = Number(dados[0].totalUsuarios) || 0;
 
-    let PorcentagemDazai = 0;
+            let porcentagemChuuya = 0;
 
-    if (votosTotais > 0) {
+            let porcentagemDazai = 0;
 
-        PorcentagemChuuya = (votosChuuya / votosTotais) * 100;
 
-        PorcentagemDazai = (votosDazai / votosTotais) * 100;
+            if (votosTotais > 0) {
 
-    }
+                porcentagemChuuya = (votosChuuya / votosTotais) * 100;
 
-    document.getElementById("Dazai").innerHTML =
-    `${PorcentagemDazai.toFixed(0)}%`;
+                porcentagemDazai = (votosDazai / votosTotais) * 100;
+            }
 
-    document.getElementById("Chuuya").innerHTML =
-    `${PorcentagemChuuya.toFixed(0)}%`;
 
-    document.getElementById("Usuarios").innerHTML =
-    totalUsuarios;
+            document.getElementById("Dazai").innerHTML =
+                `${porcentagemDazai.toFixed(0)}%`;
 
+            document.getElementById("Chuuya").innerHTML =
+                `${porcentagemChuuya.toFixed(0)}%`;
+
+            document.getElementById("Usuarios").innerHTML =
+                totalUsuarios;
 
 
             const ctx = document.getElementById('graficoPerfis');
