@@ -195,73 +195,36 @@ function desmarcarRadioButtons() {
 
 
 function mostrarResultado() {
-
-    jogo.innerHTML = "";
-
     let idAutor;
+    let htmlResultado = "";
 
     if (pontosDazai > pontosChuuya) {
-
         idAutor = 2;
-
-         sessionStorage.FOTO_USUARIO = "public\assets\imgs\perfil\pefil-dazai.jpg";
-
-        jogo.innerHTML = `
-        
-        <h1>Você combina com Osamu Dazai!</h1>
-
-        <p>
-        Sua personalidade é introspectiva, inteligente e profunda.
-        </p>
-
-        <p>
-        Livro recomendado: Indigno de Ser Humano
-        </p>
-
-        <div class="controles">
-
-            <a href="dazai.html">
-                <button class="btn-proxima">
-                    Ver Página do Autor
-                </button>
-            </a>
-
-        </div>
-        `;
-
+        sessionStorage.FOTO_USUARIO = "../assets/imgs/Perfil/perfil-dazai.jpg";
+        htmlResultado = `
+            <h1>Você combina com Osamu Dazai!</h1>
+            <p>Sua personalidade é introspectiva, inteligente e profunda.</p>
+            <p>Livro recomendado: Indigno de Ser Humano</p>
+            <div class="controles">
+                <a href="dazai.html"><button class="btn-proxima">Ver Página do Autor</button></a>
+            </div>`;
     } else {
-
         idAutor = 1;
-
-        sessionStorage.FOTO_USUARIO =  "public\assets\imgs\perfil\pefil-chuuya.jpg";
-
-
-        jogo.innerHTML = `
-        
-        <h1>Você combina com Chuuya Nakahara!</h1>
-
-        <p>
-        Você possui uma personalidade intensa, emocional e apaixonada.
-        </p>
-
-        <p>
-        Livro recomendado: Songs of a Goat
-        </p>
-
-        <div class="controles">
-
-            <a href="chuuya.html">
-                <button class="btn-proxima">
-                    Ver Página do Autor
-                </button>
-            </a>
-
-        </div>
-        `;
+        sessionStorage.FOTO_USUARIO = "../assets/imgs/Perfil/perfil-chuuya.jpg";
+        htmlResultado = `
+            <h1>Você combina com Chuuya Nakahara!</h1>
+            <p>Você possui uma personalidade intensa, emocional e apaixonada.</p>
+            <p>Livro recomendado: Songs of a Goat</p>
+            <div class="controles">
+                <a href="chuuya.html"><button class="btn-proxima">Ver Página do Autor</button></a>
+            </div>`;
     }
 
-    salvarNoBanco();
+    document.getElementById("jogo").innerHTML = htmlResultado;
+    
+    salvarNoBanco(idAutor);
 }
+
 
 
 

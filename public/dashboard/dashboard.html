@@ -19,17 +19,17 @@
 
         <div class="perfil-sidebar">
 
-    <div class="foto-usuario">
+            <div class="foto-usuario">
 
-    <img id="imagemUsuario">
+                <img id="imagemUsuario">
 
-</div>
+            </div>
 
-    <h2 id="nomeUsuarioSidebar">Usuário</h2>
+            <h2 id="nomeUsuarioSidebar">Usuário</h2>
 
-    <p>Logado</p>
+            <p>Logado</p>
 
-</div>
+        </div>
 
         <a href="../home.html">Home</a>
 
@@ -39,9 +39,9 @@
 
         <a href="../chuuya.html">Chuuya</a>
 
-        
 
-        
+
+
 
     </div>
 
@@ -117,9 +117,9 @@
                 </div>
 
 
-                
 
-        
+
+
 
             </div>
 
@@ -151,17 +151,16 @@
 <script>
     if (sessionStorage.ID_USUARIO == undefined) {
 
-    alert("Você precisa estar logado para acessar a dashboard!");
+        alert("Você precisa estar logado para acessar a dashboard!");
 
-    window.location = "../login.html";
-}
+        window.location = "../login.html";
+    }
 
     let nome = sessionStorage.NOME_USUARIO;
 
     document.getElementById("nomeUsuarioSidebar").innerHTML = nome;
 
-    document.getElementById("imagemUsuario").src =
-    sessionStorage.FOTO_USUARIO || "/assets/imgs/perfil/default.jpg";
+    document.getElementById("imagemUsuario").src = sessionStorage.getItem("FOTO_USUARIO") || "../assets/imgs/Perfil/perfil-dazai.jpg";
 
     fetch("/dashboard/buscarResultados")
 

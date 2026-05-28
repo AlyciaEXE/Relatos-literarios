@@ -10,9 +10,8 @@ senha VARCHAR(100) );
 
 CREATE TABLE autor(
 id_autor int primary key AUTO_INCREMENT,
-nome_Autor VARCHAR(100),
-fk_usuario int,
-foreign key (fk_usuario) REFERENCES usuario (idUsuario));
+nome_Autor VARCHAR(100)
+);
 
 INSERT INTO autor (id_autor, nome_Autor) VALUES 
 (1,'Chuuya Nakahara'),
@@ -24,7 +23,8 @@ Nome VARCHAR(100),
 Ano YEAR,
 Descriçao VARCHAR(100),
 fkEscritor INT,
-FOREIGN KEY (fkEscritor) REFERENCES Autor(id_autor));
+FOREIGN KEY (fkEscritor) REFERENCES autor(id_autor)
+);
 
 INSERT INTO livro (id,nome,ano,descriçao,fkescritor) VALUES
 (1,"Declinio de um Homem",1948,"Uma obra-prima do desespero existencial",2),
@@ -37,7 +37,7 @@ INSERT INTO livro (id,nome,ano,descriçao,fkescritor) VALUES
 
 select * from usuario;
 
-CREATE TABLE Pergunta(
+CREATE TABLE pergunta(
 id INT PRIMARY KEY AUTO_INCREMENT,
 Pergunta VARCHAR(100));
 
@@ -47,16 +47,16 @@ INSERT INTO pergunta (id,pergunta) VALUES
 (3,"Que tipo de protagonista te interessa?");
 
 
-CREATE TABLE opcao (
-id_opcao INT AUTO_INCREMENT PRIMARY KEY,
-Opçao VARCHAR(100),
+CREATE TABLE alternativa (
+id_alternativa INT AUTO_INCREMENT PRIMARY KEY,
+opcao VARCHAR(100),
 fkPergunta INT,
 fkAutor INT,
-FOREIGN KEY (fkAutor) REFERENCES Autor(id_autor),
+FOREIGN KEY (fkAutor) REFERENCES autor(id_autor),
 FOREIGN KEY (fkPergunta) REFERENCES pergunta(id));
 
 
-INSERT INTO opcao (id_opcao,Opçao,fkPergunta,fkAutor) VALUES 
+INSERT INTO alternativa (id_alternativa,opcao,fkPergunta,fkAutor) VALUES 
 (1, "Profundidade psicológica e questionamentos existenciais",1,2),
 (2,"Beleza lírica e expressão emocional",1,1),
 (3,"Prosa introspectiva e sombria",2,2),
@@ -64,47 +64,34 @@ INSERT INTO opcao (id_opcao,Opçao,fkPergunta,fkAutor) VALUES
 (5,"Prosa introspectiva e sombria",3,2),
 (6,"Versos poéticos e melódicos",3,1);
 
-CREATE TABLE Resposta (
-idResposta INT AUTO_INCREMENT,
+
+
+
+CREATE TABLE resposta (
+idresposta INT PRIMARY KEY AUTO_INCREMENT,
 fkUsuario INT,
-fkPergunta INT,
-fkOpcao INT,
-hora_data DATETIME DEFAULT CURRENT_TIMESTAMP,
-PRIMARY KEY (idResposta,fkUsuario,fkPergunta,fkOpcao),
-FOREIGN KEY(fkUsuario) REFERENCES usuario (idUsuario),
-FOREIGN KEY(fkopcao) REFERENCES opcao(id_opcao),
-FOREIGN KEY(fkPergunta) REFERENCES pergunta (id));
+fkAutor INT,
+data_resposta DATETIME DEFAULT CURRENT_TIMESTAMP,
+FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario),
+FOREIGN KEY (fkAutor) REFERENCES autor(id_Autor)
+);
 
-SELECT fkUsuario ;
+select * from usuario;
 
-select * FROM Resposta;
 
-SELECT Pergunta,Opçao,nome_Autor,nome FROM      Reposta
-JOIN Pergunta ON id = fkPergunta
-JOIN Autor ON id_autor = fkAutor
-JOIN usuario ON id_Usuario = fk;
+INSERT INTO resposta (fkUsuario, fkAutor) VALUES
+(1, 2);
 
-INSERT INTO Resposta (fkUsuario,fkPergunta,fkopcao,fkAutor) VALUES 
-(?,?,?);
 
 
 SELECT 
-usuario.nome,
-Pergunta.pergunta,
-opcao.Opçao,
-autor.nome_Autor
-
-FROM Resposta
-
-JOIN usuario
-ON usuario.idUsuario = Resposta.fkUsuario
-
-JOIN Pergunta
-ON Pergunta.id = Resposta.fkPergunta
-
-JOIN opcao
-ON opcao.id_opcao = Resposta.fkOpcao
-
+autor.nome_Autor,
+COUNT(resposta.fkAutor) AS total
+FROM resposta
 JOIN autor
-ON autor.id_autor = opcao.fkAutor;
+ON resposta.fkAutor = autor.id_autor
+GROUP BY autor.nome_Autor;
+
+
+
 
