@@ -200,7 +200,6 @@ function mostrarResultado() {
 
     let idAutor;
 
-    
     if (pontosDazai > pontosChuuya) {
 
         idAutor = 2;
@@ -256,9 +255,9 @@ function mostrarResultado() {
         `;
     }
 
-    
-    salvarResultadoBanco(idAutor);
+    salvarNoBanco();
 }
+
 
 
 
@@ -285,12 +284,12 @@ function salvarNoBanco() {
             "Content-Type": "application/json"
         },
 
-        body: JSON.stringify({
+      body: JSON.stringify({
 
-            usuario_idusuario: idUsuario,
-            Autor_idAutor: idAutor
+    fkUsuario: idUsuario,
+    fkAutor: idAutor
 
-        })
+})
 
     })
 

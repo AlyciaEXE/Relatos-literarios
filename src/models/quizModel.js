@@ -5,7 +5,7 @@ function salvarResultado(usuario, autor) {
     var instrucaoSql = `
 
         INSERT INTO resposta
-        (usuario_idusuario, Autor_idAutor)
+        (fkUsuario, fkAutor)
         VALUES
         (${usuario}, ${autor});
 

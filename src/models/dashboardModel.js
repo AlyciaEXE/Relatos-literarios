@@ -6,9 +6,9 @@ function buscarResultados() {
 
         SELECT
 
-        SUM(CASE WHEN Autor_idAutor = 1 THEN 1 ELSE 0 END) AS votosChuuya,
+        IFNULL(SUM(CASE WHEN fkAutor = 1 THEN 1 ELSE 0 END), 0) AS votosChuuya,
 
-        SUM(CASE WHEN Autor_idAutor = 2 THEN 1 ELSE 0 END) AS votosDazai,
+        IFNULL(SUM(CASE WHEN fkAutor = 2 THEN 1 ELSE 0 END), 0) AS votosDazai,
 
         (SELECT COUNT(*) FROM usuario) AS totalUsuarios
 

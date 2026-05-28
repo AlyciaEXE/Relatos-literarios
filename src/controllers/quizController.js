@@ -2,18 +2,18 @@ var quizModel = require("../models/quizModel");
 
 function salvarResultado(req, res) {
 
-    var usuario = req.body.usuario_idusuario;
-    var autor = req.body.Autor_idAutor;
+    var usuario = req.body.fkUsuario;
+    var autor = req.body.fkAutor;
 
     quizModel.salvarResultado(usuario, autor)
 
-        .then(function(resultado){
+        .then(function (resultado) {
 
             res.json(resultado);
 
         })
 
-        .catch(function(erro){
+        .catch(function (erro) {
 
             console.log(erro);
 

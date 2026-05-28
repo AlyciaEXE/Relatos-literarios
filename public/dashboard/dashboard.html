@@ -111,23 +111,34 @@
         .then(function (dados) {
 
             console.log(dados);
-            let votosDazai = dados[0].votosDazai;
+            let votosDazai = dados[0].votosDazai || 0;
 
-            let votosChuuya = dados[0].votosChuuya;
+    let votosChuuya = dados[0].votosChuuya || 0;
 
-            let votosTotais = dados[0].votosDazai + dados[0].votosChuuya;
+    let votosTotais = votosDazai + votosChuuya;
 
-            let totalUsuarios = dados[0].totalUsuarios;
+    let totalUsuarios = dados[0].totalUsuarios || 0;
 
-            let PorcentagemChuuya = (votosChuuya / votosTotais) * 100;
-            let PorcentagemDazai = (votosDazai / votosTotais) * 100;
+    let PorcentagemChuuya = 0;
 
-            document.getElementById("Dazai").innerHTML = `${PorcentagemDazai.toFixed(0)}%`;
+    let PorcentagemDazai = 0;
 
-            document.getElementById("Chuuya").innerHTML = `${PorcentagemChuuya.toFixed(0)}%`;
+    if (votosTotais > 0) {
 
-            document.getElementById("Usuarios").innerHTML = totalUsuarios;
+        PorcentagemChuuya = (votosChuuya / votosTotais) * 100;
 
+        PorcentagemDazai = (votosDazai / votosTotais) * 100;
+
+    }
+
+    document.getElementById("Dazai").innerHTML =
+    `${PorcentagemDazai.toFixed(0)}%`;
+
+    document.getElementById("Chuuya").innerHTML =
+    `${PorcentagemChuuya.toFixed(0)}%`;
+
+    document.getElementById("Usuarios").innerHTML =
+    totalUsuarios;
 
 
 
