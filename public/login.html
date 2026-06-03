@@ -37,7 +37,7 @@
                     <a href="home.html">Inicial</a>
                 </li>
 
-                
+
 
                 <li>|</li>
 
@@ -88,10 +88,7 @@
 
                     <span>E-mail</span>
 
-                    <input 
-                    id="email_input" 
-                    type="text" 
-                    placeholder="Digite seu e-mail">
+                    <input id="email_input" type="text" placeholder="Digite seu e-mail">
 
                 </div>
 
@@ -100,10 +97,7 @@
 
                     <span>Senha</span>
 
-                    <input 
-                    id="senha_input" 
-                    type="password" 
-                    placeholder="******">
+                    <input id="senha_input" type="password" placeholder="******">
 
                 </div>
 
@@ -141,7 +135,7 @@
 
     function entrar() {
 
-         div_aguardar.style.display = "flex";
+        div_aguardar.style.display = "flex";
 
         var emailVar = email_input.value;
         var senhaVar = senha_input.value;
@@ -149,7 +143,13 @@
         if (emailVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            finalizarAguardar();
+            
+            return false;
+            div_aguardar.style.display = "none";
+        } else if (emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            
             return false;
             div_aguardar.style.display = "none";
         }
@@ -190,9 +190,12 @@
                 });
 
             } else {
-
                 console.log("Houve um erro ao tentar realizar o login!");
-
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML = "Houve um erro ao tentar realizar o login!";
+                
+                settimeout(sumirMensagem(), 5000);
+                return false;
                 resposta.text().then(texto => {
                     console.error(texto);
                     finalizarAguardar(texto);
@@ -207,6 +210,7 @@
     }
 
     function sumirMensagem() {
+         div_aguardar.style.display = "none";
         cardErro.style.display = "none"
     }
 
